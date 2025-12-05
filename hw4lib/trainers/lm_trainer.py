@@ -88,7 +88,7 @@ class LMTrainer(BaseTrainer):
             with torch.autocast(device_type=self.device, dtype=torch.float16):
 
                 # TODO: Get raw logits and attention weights from model
-                raw_preds, attn_weights = self.model(targets_shifted)
+                raw_preds, attn_weights = self.model(targets_shifted, lengths)
 
                 # TODO: Calculate raw loss first
                 # What is the shape of raw_preds and targets_golden? 
@@ -183,7 +183,7 @@ class LMTrainer(BaseTrainer):
             # Forward pass
             with torch.inference_mode():
                 # TODO: Get raw predictions and attention weights from model
-                raw_preds, attn_weights = self.model(targets_shifted)
+                raw_preds, attn_weights = self.model(targets_shifted, lengths)
 
                 # TODO: Calculate loss
                 # What is the shape of raw_preds and targets_golden? 
